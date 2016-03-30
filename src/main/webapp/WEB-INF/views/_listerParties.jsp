@@ -12,41 +12,56 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
-    <body class="tablecentre">
-        <h1>Parties en cours</h1>
-        <table class="tablecentre">
-            <thead>
-                <tr>
-                    <td>
-                        Partie numero
-                    </td>
-                    <td>
-                        Rejoindre
-                    </td>
-                </tr>
-            </thead>
-            <c:forEach items="${mesParties}" var="maPartie">
-                <tr>
-                    <td colspan="2">
-                        ${maPartie.id}
-                    </td>
-                    <td>
-                        <input type="button" onclick="rejoindre(${maPartie.id})" value="Rejoindre"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
+    <body>
+        <div>
 
-                    </td>
-                    <c:forEach items="${maPartie.utilisateurs}" var="utilisateur">
-                        <td>
-                            ${utilisateur.nom},
-                        </td>
-                    </c:forEach>
+        </div>
 
-                </tr>
-            </c:forEach>
+        <table>
+            <tr>
+                <td class="cotegauche">
+                </td>
+                <td class="tablecentre" background ="Images/12972955.jpg">
+                    <h1>Liste des parties disponibles</h1>
+                </td>
+                <td class="cotedroit">
+                </td>
+            </tr>
+            <tr>
+                <td class="cotegauche">
+                </td>
+                <td>
+                    <table class="tablecentre" background ="Images/12972955.jpg">
+                        <tr>
+                            <td>
+                                Partie numero
+                            </td>
+                            <td>
+                                Rejoindre
+                            </td>
+                        </tr>
+                        <c:forEach items="${mesParties}" var="maPartie">
+                            <tr>
+                                <td>
+                                    ${maPartie.id}
+                                </td>
+                                <td>
+                                    <input type="button" onclick="rejoindre(${maPartie.id})" value="Rejoindre"/>
+                                </td>
+                            </tr>
+                            <c:forEach items="${maPartie.utilisateurs}" var="utilisateur">
+                                <tr>
+                                    <td>
+                                        ${utilisateur.nom},
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                        </c:forEach>
+                </td>
+                <td class="cotedroit">
+                </td>
+            </tr>
         </table>
-
-    </body>
+    </table>
+</body>
 </html>

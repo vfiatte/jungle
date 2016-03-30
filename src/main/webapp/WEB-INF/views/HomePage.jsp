@@ -10,8 +10,7 @@
         <script src="<c:url value = "/JS/fonction.js"/>" type="text/javascript"></script>
         
     </head>
-    <body onload="onload()">
-        
+    <body onload="onload()" background ="Images/186f8fc7646bec6614a1e8cabe6383a2_large.jpeg">
         <div class="menu"> 
         </div>
         <div class="contenu"> 
