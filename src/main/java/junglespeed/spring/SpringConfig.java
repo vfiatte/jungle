@@ -75,7 +75,7 @@ public class SpringConfig extends WebMvcConfigurerAdapter{
 
     @Bean
     public EntityManagerFactory entityManagerFactory() {
-        return Persistence.createEntityManagerFactory("PU");
+        return Persistence.createEntityManagerFactory("junglePU");
     }
 
 }

@@ -19,6 +19,20 @@ public class HomeController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home(){
         
-        return "_TEMPLATE";
+        return "HomePage";
+    }
+    
+     @RequestMapping(value = "accueilContenu", method = RequestMethod.GET)
+    public String contenu(){
+        return "_accueilContenu";
+    }
+    
+     @RequestMapping(value = "menu", method = RequestMethod.GET)
+    public String menu(){
+        return "_MENU";
+    }
+    @RequestMapping(value = "pied", method = RequestMethod.GET)
+    public String pied(){
+        return "_FOOTER";
     }
 }

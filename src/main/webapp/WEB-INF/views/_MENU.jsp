@@ -1,2 +1,3 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<input type="button" value="Partie disponible" onclick="chargeContenu('/film/lister')"/>
+<script src="<c:url value = "/JS/fonction.js"/>" type="text/javascript"></script>
+<input type="button" value="Partie disponible" onclick="listerParties()"/>

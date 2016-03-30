@@ -37,6 +37,45 @@ public class Utilisateur implements Serializable {
     @OneToMany(mappedBy = "utilisateur")
     List<Carte> cartes = new ArrayList<Carte>();
 
+    public Utilisateur() {
+    }
+
+    
+    
+    public Utilisateur(Long id, String nom, Partie partie) {
+        this.id = id;
+        this.nom = nom;
+        this.partie = partie;
+    }
+
+    
+    
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public Partie getPartie() {
+        return partie;
+    }
+
+    public void setPartie(Partie partie) {
+        this.partie = partie;
+    }
+
+    public List<Carte> getCartes() {
+        return cartes;
+    }
+
+    public void setCartes(List<Carte> cartes) {
+        this.cartes = cartes;
+    }
+
+    
+    
     public Long getId() {
         return id;
     }

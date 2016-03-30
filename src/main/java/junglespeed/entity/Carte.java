@@ -35,6 +35,17 @@ public class Carte implements Serializable {
     @JoinColumn(name = "UTILISATEUR_ID")
     private Utilisateur utilisateur;
 
+    public Carte() {
+    }
+    
+    public Carte(Long id, Couleur couleur, Utilisateur utilisateur) {
+        this.id = id;
+        this.couleur = couleur;
+        this.utilisateur = utilisateur;
+    }
+
+    
+    
     public Long getId() {
         return id;
     }
@@ -42,6 +53,24 @@ public class Carte implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public Couleur getCouleur() {
+        return couleur;
+    }
+
+    public void setCouleur(Couleur couleur) {
+        this.couleur = couleur;
+    }
+
+    public Utilisateur getUtilisateur() {
+        return utilisateur;
+    }
+
+    public void setUtilisateur(Utilisateur utilisateur) {
+        this.utilisateur = utilisateur;
+    }
+    
+    
 
     @Override
     public int hashCode() {

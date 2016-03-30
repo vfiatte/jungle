@@ -33,10 +33,39 @@ public class Partie implements Serializable {
     @Enumerated(EnumType.STRING)
     private Statut statut;
     
-    
     @OneToMany(mappedBy = "partie")
     List<Utilisateur> utilisateurs = new ArrayList<Utilisateur>();
 
+    public Partie() {
+    }
+
+    
+    
+    public Partie(Long id, Statut statut) {
+        this.id = id;
+        this.statut = statut;
+    }
+
+    
+    
+    public Statut getStatut() {
+        return statut;
+    }
+
+    public void setStatut(Statut statut) {
+        this.statut = statut;
+    }
+
+    public List<Utilisateur> getUtilisateurs() {
+        return utilisateurs;
+    }
+
+    public void setUtilisateurs(List<Utilisateur> utilisateurs) {
+        this.utilisateurs = utilisateurs;
+    }
+
+    
+    
     public Long getId() {
         return id;
     }
