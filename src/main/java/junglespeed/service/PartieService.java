@@ -23,8 +23,7 @@ public class PartieService {
     
     public void creerPartie(){
         List<Partie> listeParties = new ArrayList<>();
-        listeParties = (List<Partie>) partieCrudService.findAll();
-        System.out.println(listeParties.size());
+        listeParties = (List<Partie>) partieCrudService.findAllByStatut(Statut.LIBRE);
         if (listeParties.size() <= 4){
             for(int i = 0; i < 4-listeParties.size(); i++){
                 Partie p = new Partie();
@@ -33,5 +32,14 @@ public class PartieService {
             }
         }
         return;
+    }
+    
+    
+    public void commencerPartie(Partie p){
+        if(p.getUtilisateurs().size()==2){
+            p.setStatut(Statut.DEMARRE);
+            partieCrudService.save(p);
+        }
+        
     }
 }

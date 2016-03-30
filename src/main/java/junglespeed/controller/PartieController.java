@@ -7,6 +7,7 @@ package junglespeed.controller;
 
 import junglespeed.entity.Partie;
 import junglespeed.entity.Utilisateur;
+import junglespeed.enumeration.Statut;
 import junglespeed.service.PartieCrudService;
 import junglespeed.service.PartieService;
 import junglespeed.service.UtilisateurCrudService;
@@ -37,7 +38,7 @@ public class PartieController {
 
     @RequestMapping(value = "lister", method = RequestMethod.GET)
     public String lister(Model model) {
-        Iterable<Partie> listeParties = partieCrudService.findAll();
+        Iterable<Partie> listeParties = partieCrudService.findAllByStatut(Statut.LIBRE);
         model.addAttribute("mesParties", listeParties);
         return "_listerParties";
 
@@ -64,6 +65,7 @@ public class PartieController {
     @RequestMapping(value = "rejoindre", method = RequestMethod.POST)
     public String Rejoindre(@ModelAttribute(value = "utilisateur") Utilisateur u) {
         utilisateurCrudService.save(u);
+        
         return "redirect:/Partie/lister";
     }
 }
