@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import junglespeed.entity.Carte;
 import junglespeed.entity.Partie;
 import junglespeed.entity.Utilisateur;
+import junglespeed.enumeration.Couleur;
 import junglespeed.enumeration.Statut;
 import junglespeed.service.ActualisationService;
 import junglespeed.service.CarteCrudService;
@@ -91,13 +92,17 @@ public class PartieController {
         List<Utilisateur> listeUtilisateurs = p.getUtilisateurs();
         model.addAttribute("mesUtilisateurs", listeUtilisateurs);
         partieCrudService.save(p);
-        actualisationService.MAJPartie();
+//        actualisationService.MAJPartie();
         utilisateurCrudService.save(u);
 
-        if (p.getUtilisateurs().size() == 2) {
-//            actualisationService.MAJPartie();
-            List<Carte> listeCArte = carteCrudService.findByUtilisateurId(u.getId());
-            model.addAttribute("carteJ", listeCArte);
+        if (listeUtilisateurs.size() == 2) {
+            actualisationService.MAJPartie();
+            
+            String couleur1 = partieService.jouer1(p);
+            String couleur2 = partieService.jouer2(p);
+            
+            model.addAttribute("couleur1", couleur1);
+            model.addAttribute("couleur2", couleur2);
 
             int i = carteCrudService.countByUtilisateurId(u.getId());
             model.addAttribute("nbCartesi", i);

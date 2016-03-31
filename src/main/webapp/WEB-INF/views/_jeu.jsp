@@ -6,30 +6,25 @@
 
 <font color="red">Partie numero : ${maPartie.id} <br> Joueur en cours : ${joueur.nom}</font>
 <table>
+
+
     <tr>
         <c:forEach items="${maPartie.utilisateurs}" var="utilisateur">
-        <tr>
             <td width="300px" background ="Images/12972955.jpg">
                 ${utilisateur.nom}
             </td>
-        </tr>
         </c:forEach>
-        <td width="50px" background ="Images/12972955.jpg">
-            ${nbCartesi} cartes
+    </tr>
+    <tr>
+        <td width="300px" height="300px" bgcolor ="${couleur1}">
+
         </td>
 
+        <td width="300px" height="300px" bgcolor ="${couleur2}">
 
-        <td width="50px" background ="Images/12972955.jpg">
-            ${nbCartesj} cartes
         </td>
-        <c:forEach items="${carteJ}" var="carte">
-            <tr>
-                <!--                <td width="300px" height="300px">
-                
-                                </td>-->
-            </tr>
+    </tr> 
 
-        
-    </c:forEach>
-</tr>
+
+
 </table>
