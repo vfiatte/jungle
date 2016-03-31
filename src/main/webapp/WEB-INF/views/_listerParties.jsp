@@ -49,13 +49,17 @@
                                     <input type="button" onclick="rejoindre(${maPartie.id})" value="Rejoindre"/>
                                 </td>
                             </tr>
-                            <c:forEach items="${maPartie.utilisateurs}" var="utilisateur">
-                                <tr>
+                            <tr>
+                                
+
                                     <td>
-                                        ${utilisateur.nom},
+                                        <c:forEach items="${maPartie.utilisateurs}" var="utilisateur">
+                                        ${utilisateur.nom} / 
+                                        </c:forEach>
                                     </td>
-                                </tr>
-                            </c:forEach>
+
+                                
+                            </tr>
                         </c:forEach>
                 </td>
                 <td class="cotedroit">

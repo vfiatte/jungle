@@ -10,10 +10,10 @@ package junglespeed.enumeration;
  * @author admin
  */
 public enum Couleur {
-    VERT,
-    JAUNE,
-    ROUGE,
-    BLEU,
-    VIOLET;
+    green,
+    yellow,
+    red,
+    blue,
+    purple;
     
 }

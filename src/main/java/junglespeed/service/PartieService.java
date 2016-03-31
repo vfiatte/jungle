@@ -8,7 +8,9 @@ package junglespeed.service;
 import java.util.ArrayList;
 import java.util.List;
 import junglespeed.entity.Partie;
+import junglespeed.entity.Utilisateur;
 import junglespeed.enumeration.Statut;
+import static junglespeed.enumeration.Statut.DEMARRE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,14 +20,21 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class PartieService {
+
     @Autowired
     PartieCrudService partieCrudService;
+
+    @Autowired
+    CarteService carteService;
+
+    @Autowired
+    UtilisateurCrudService utilisateurCrudService;
     
-    public void creerPartie(){
+    public void creerPartie() {
         List<Partie> listeParties = new ArrayList<>();
         listeParties = (List<Partie>) partieCrudService.findAllByStatut(Statut.LIBRE);
-        if (listeParties.size() <= 4){
-            for(int i = 0; i < 4-listeParties.size(); i++){
+        if (listeParties.size() <= 4) {
+            for (int i = 0; i < 4 - listeParties.size(); i++) {
                 Partie p = new Partie();
                 p.setStatut(Statut.LIBRE);
                 partieCrudService.save(p);
@@ -33,13 +42,24 @@ public class PartieService {
         }
         return;
     }
-    
-    
-    public void commencerPartie(Partie p){
-        if(p.getUtilisateurs().size()==2){
-            p.setStatut(Statut.DEMARRE);
-            partieCrudService.save(p);
+
+//    public void 
+    public void commencerPartie(Partie p) {
+        if (p.getUtilisateurs().size() == 2) {
+            if (p.getStatut().equals(DEMARRE)){
+                return;
+            } else {
+                p.setStatut(Statut.DEMARRE);
+                carteService.distribution(p.getUtilisateurs().get(0), p.getUtilisateurs().get(1));
+                partieCrudService.save(p);
+                utilisateurCrudService.save(p.getUtilisateurs().get(0));
+                utilisateurCrudService.save(p.getUtilisateurs().get(1));
+                
+                
+                
+            }
+
         }
-        
     }
 }
+

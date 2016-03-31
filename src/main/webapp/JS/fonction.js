@@ -4,26 +4,28 @@
  * and open the template in the editor.
  */
 
-function onload(){
+function onload() {
     $('.contenu').load('accueilContenu');
     $('.menu').load('menu');
     $('.footer').load('pied');
 }
 
-function listerParties(){
+function listerParties() {
     $('.contenu').load('Partie/creer')
 }
 
-function ajoutJoueur(){
+function ajoutJoueur() {
     $('.contenu').load('Joueur/ajout')
 }
 
-function rejoindre(id){
-    $('.contenu').load('Partie/rejoindre/'+id);
+function rejoindre(id) {
+    $('.contenu').load('Partie/rejoindre/' + id);
 }
 
-function rejoindrePost(){
+function rejoindrePost() {
     $.post(('/jquery/Partie/rejoindre'), $('form').serialize(), function success(data) {
         $('.contenu').html(data);
     });
 }
+
+

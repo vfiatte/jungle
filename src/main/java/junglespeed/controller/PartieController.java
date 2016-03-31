@@ -5,9 +5,15 @@
  */
 package junglespeed.controller;
 
+import java.util.List;
+import javax.servlet.http.HttpSession;
+import junglespeed.entity.Carte;
 import junglespeed.entity.Partie;
 import junglespeed.entity.Utilisateur;
 import junglespeed.enumeration.Statut;
+import junglespeed.service.ActualisationService;
+import junglespeed.service.CarteCrudService;
+import junglespeed.service.CarteService;
 import junglespeed.service.PartieCrudService;
 import junglespeed.service.PartieService;
 import junglespeed.service.UtilisateurCrudService;
@@ -36,6 +42,15 @@ public class PartieController {
     @Autowired
     PartieService partieService;
 
+    @Autowired
+    CarteService carteService;
+
+    @Autowired
+    CarteCrudService carteCrudService;
+
+    @Autowired
+    ActualisationService actualisationService;
+
     @RequestMapping(value = "lister", method = RequestMethod.GET)
     public String lister(Model model) {
         Iterable<Partie> listeParties = partieCrudService.findAllByStatut(Statut.LIBRE);
@@ -63,9 +78,47 @@ public class PartieController {
     }
 
     @RequestMapping(value = "rejoindre", method = RequestMethod.POST)
-    public String Rejoindre(@ModelAttribute(value = "utilisateur") Utilisateur u) {
+    public String Rejoindre(@ModelAttribute(value = "utilisateur") Utilisateur u, Model model, HttpSession session) {
         utilisateurCrudService.save(u);
-        
+
+        model.addAttribute("utilisateur", u);
+        session.setAttribute("joueur", u);
+
+        Partie p = partieCrudService.findOne(u.getPartie().getId());
+//        p.getUtilisateurs().add(u);
+        model.addAttribute("maPartie", p);
+        p.getUtilisateurs().add(u);
+        List<Utilisateur> listeUtilisateurs = p.getUtilisateurs();
+        model.addAttribute("mesUtilisateurs", listeUtilisateurs);
+        partieCrudService.save(p);
+        actualisationService.MAJPartie();
+        utilisateurCrudService.save(u);
+
+        if (p.getUtilisateurs().size() == 2) {
+//            actualisationService.MAJPartie();
+            List<Carte> listeCArte = carteCrudService.findByUtilisateurId(u.getId());
+            model.addAttribute("carteJ", listeCArte);
+
+            int i = carteCrudService.countByUtilisateurId(u.getId());
+            model.addAttribute("nbCartesi", i);
+
+            return "_jeu";
+        }
+        partieCrudService.save(p);
         return "redirect:/Partie/lister";
+
     }
+
+//    @RequestMapping(value = "demarrer/{idPartie}", method = RequestMethod.GET)
+//    public String Demarrer(@PathVariable(value = "idPartie") long id, Model model) {
+//        
+//        
+//        Partie p = partieCrudService.findOne(id);
+//        Utilisateur u1 = p.getUtilisateurs().get(0);
+//        Utilisateur u2 = p.getUtilisateurs().get(1);
+//        Carte c1 = u1.getCartes().get(0);
+//        Carte c2 = u2.getCartes().get(1);
+//        model.addAttribute("carte1", c1);
+//        model.addAttribute("carte2", c2);
+//    }
 }
